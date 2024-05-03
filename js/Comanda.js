@@ -1,8 +1,8 @@
 
-/** La comanda (segon component) rebrà la informació dels plats seleccionats a través de l'event anterior.
- *  Quan detecti que s'ha fet clic al botó per afegir un plat, haurà de recuperar la seva informació i afegir-lo a la comanda. 
- * Els plats de dins la comanda seran el nostre tercer component, que no és una altra cosa que la versió reduïda del component del plat. 
- * Addicionalment, s'haurà d'incloure un selector de quantitat de tipus + / -. La comanda, a banda dels plats, haurá de mostrar l'import total.
+/** La comanda (segon component) rebrà la informació dels plats seleccionats a través de l'event anterior. [X]
+ *  Quan detecti que s'ha fet clic al botó per afegir un plat, haurà de recuperar la seva informació i afegir-lo a la comanda. [X]
+ * Els plats de dins la comanda seran el nostre tercer component, que no és una altra cosa que la versió reduïda del component del plat. []
+ * Addicionalment, s'haurà d'incloure un selector de quantitat de tipus + / -. La comanda, a banda dels plats, haurá de mostrar l'import total. []
  */
 
 class ComandaComponent extends HTMLElement {

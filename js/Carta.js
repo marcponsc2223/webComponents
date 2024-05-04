@@ -5,7 +5,6 @@ class CartaComponent extends HTMLElement {
         this.attachShadow({ mode: 'open' });
         this.shadowRoot.innerHTML = `
             <style>
-                /* Estilos encapsulados */
                 :host {
                     display: block;
                     border: 1px solid black;
@@ -29,10 +28,8 @@ class CartaComponent extends HTMLElement {
                 
                 .column {
                     padding-right: 85px;
-                    flex: 1 0 25%; /* Esto hace que cada columna ocupe el mismo espacio */
-                    /* Añade estilos adicionales según sea necesario */
+                    flex: 1 0 25%;
                 }
-                /* Agrega estilos adicionales según sea necesario */
             </style>
             <!-- Estructura encapsulada -->
             <div class="container">

@@ -76,7 +76,6 @@ class PlatsComponent extends HTMLElement {
             document.addEventListener('crear-component-plat', (event) => {
                 this.repetit = false
                 let menu = event.detail
-
                 this.agregarMenu(menu);
                 this.afegirQuantitat(menu)
                 // if (!this.repetit) 
@@ -93,6 +92,10 @@ class PlatsComponent extends HTMLElement {
             } 
         })
         if (!this.repetit) this.plats.push(menu)
+        // this.total.push(menu.preu)
+        
+        // div.textContent = 'Preu total: ' + menu.preu
+        // this.total.push(menu.preu)
         this.guardarPreuTotal(menu, false)
     }
     afegirQuantitat(platNou) {
@@ -125,7 +128,7 @@ class PlatsComponent extends HTMLElement {
         comandesDiv.appendChild(platElement);
         
         let quantitatP = this.shadowRoot.getElementById(plat.nom)
-
+        // let esborrar = false
         divAdd.querySelector('.add').addEventListener('click', (event) =>{
             let target = event.target.parentElement.parentElement
             if (target.id === divAdd.id) plat.quantitat++; 
@@ -138,38 +141,30 @@ class PlatsComponent extends HTMLElement {
             quantitatP.textContent = 'X' + plat.quantitat
             this.guardarPreuTotal(plat, true) 
         })
-        if (!this.repetit) this.originalPrice.push({nom: plat.nom, price: parseFloat(plat.preu.replace('€', ''))})
+        if (!this.repetit) {
+            this.originalPrice.push({nom: plat.nom, price: parseFloat(plat.preu.replace('€', ''))})
+        }
+        
         
         })  
     }
+    // Uso el reduce para decirle que sume el precio al total, y lo va sumando uno a uno, precio a precio.
     guardarPreuTotal(plat, esborrar) {
-        this.total.push(plat.preu)
-        let diners = 0
-        let div = this.shadowRoot.getElementById('total')
-        console.log(this.originalPrice);
-        if (esborrar) {
-            diners = div.textContent.match(/\d+/)[0]
-                this.originalPrice.forEach(price => {
-                    if (price.nom === plat.nom) {
-                        diners -= price.price
-                        console.log(this.total);
-                        this.total.pop(plat.preu)
-                        this.total.pop(plat.preu)
-                        console.log(this.total);
-                    }
-            })
+        let div = this.shadowRoot.getElementById('total');
+    
+        if (!esborrar) {
+            this.total.push(plat.preu);
         } else {
-            this.total.forEach(tot => {
-                diners += parseFloat(tot.replace('€', ''))
-            }) 
+            let foundIndex = this.total.findIndex(precio => precio === plat.preu);
+            if (foundIndex !== -1) {
+                this.total.splice(foundIndex, 1);
+            }
         }
-        console.log(diners);
-
-        div.textContent = 'Preu total: ' + diners + '€'
+    
+        let diners = this.total.reduce((total, precio) => total + parseFloat(precio.replace('€', '')), 0);
+        div.textContent = 'Preu total: ' + diners + '€';
     }
-    afegir_o_quitar_plats(afegir, plat) {
-        afegir ? plat.quantitat++ : plat.quantitat--
-    }
+    
     
 }
 
